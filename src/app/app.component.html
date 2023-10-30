@@ -1,0 +1,43 @@
+<!-- <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+</head>
+<body>
+  <div class="container">
+      <h1>To-Do List</h1>
+      <form id="todo-form">
+          <input type="text" id="todo-input" placeholder="Enter a task">
+          <button type="submit">Add</button>
+      </form>
+      <table id="todo-table">
+          <tr>
+              <th>Task</th>
+              <th>Done</th>
+          </tr>
+      </table>
+  </div>
+
+</body> -->
+
+<div class="container">
+  <h1>To-Do List</h1>
+  <form [formGroup]="todoForm" (ngSubmit)="addTask()">
+    <input type="text" formControlName="newTask" placeholder="Enter a task">
+    <button type="submit">Add</button>
+  </form>
+  <table>
+    <tr>
+      <th>Task</th>
+      <th>Done</th>
+    </tr>
+    <tr *ngFor="let task of tasks; let i = index" [class.completed]="task.done">
+      <td>{{ task.name }}</td>
+      <td>
+        <input type="checkbox" [(ngModel)]="task.done" (change)="toggleDone(i)">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<router-outlet></router-outlet>
